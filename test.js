@@ -5,8 +5,8 @@ describe('path-to-regexp', function () {
   describe('CVE-2024-52798', function () {
     it('should generate a regex without backtracking', function () {
       console.log(pathToRegExp('/:a-:b'));
-      console.log(/^(?:\/([^/]+?))-(?:((?:(?!\/|-).)+?))\/?$/i);
-      assert.deepEqual(pathToRegExp('/:a-:b'), /^(?:\/([^/]+?))-(?:((?:(?!\/|-).)+?))\/?$/i);
+      console.log(/^(?:/([^/]+?))-(?:((?:(?!/|-).)+?))/?$/i);
+      assert.deepEqual(pathToRegExp('/:a-:b'), /^(?:/([^/]+?))-(?:((?:(?!/|-).)+?))/?$/i);
     });
   });
 
