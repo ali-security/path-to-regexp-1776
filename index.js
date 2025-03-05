@@ -65,9 +65,8 @@ function pathToRegexp(path, keys, options) {
     return new RegExp(path.join('|'), flags);
   }
 
-  // /\\.|(\/)?(\.)?:(\w+)(\(.*?\))?(\*)?(\?)?|[.*]|\/\(/g,
   path = path.replace(
-    /\\.|(\/)?(\.)?:(\w+)(\(.*?\))?(\*)?(\?)?|[.*]|\/\(|-/g,
+    /\\.|(\/)?(\.)?:(\w+)(\(.*?\))?(\*)?(\?)?|[.*]|\/\(/g,,
     function (match, slash, format, key, capture, star, optional, offset) {
       if (match[0] === '\\') {
         backtrack += match;
