@@ -105,7 +105,10 @@ function pathToRegexp(path, keys, options) {
       optional = optional || '';
       capture = capture ?
         capture.replace(/\\.|\*/, function (m) { return m === '*' ? '(.*)' : m; }) :
-        (backtrack ? '((?:(?!/|' + backtrack + ').)+?)' : '([^/' + format + ']+?)');
+        (backtrack
+          ? '((?:(?!/|-|' + backtrack + ').)+?)'  // Ensure `-` is not part of :b
+          : '([^/|-]+?)');  // Prevent :b from consuming `-`
+        //(backtrack ? '((?:(?!/|' + backtrack + ').)+?)' : '([^/' + format + ']+?)');
 
       keys.push({
         name: key,
