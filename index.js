@@ -65,8 +65,9 @@ function pathToRegexp(path, keys, options) {
     return new RegExp(path.join('|'), flags);
   }
 
+  // /\\.|(\/)?(\.)?:(\w+)(\(.*?\))?(\*)?(\?)?|[.*]|\/\(/g,
   path = path.replace(
-    /\\.|(\/)?(\.)?:(\w+)(\(.*?\))?(\*)?(\?)?|[.*]|\/\(/g,
+    /\\.|(\/)?(\.)?:(\w+)(\(.*?\))?(\*)?(\?)?|[.*]|\/\(|-/g,
     function (match, slash, format, key, capture, star, optional, offset) {
       if (match[0] === '\\') {
         backtrack += match;
@@ -105,10 +106,7 @@ function pathToRegexp(path, keys, options) {
       optional = optional || '';
       capture = capture ?
         capture.replace(/\\.|\*/, function (m) { return m === '*' ? '(.*)' : m; }) :
-        (backtrack
-          ? '((?:(?!/|-|' + backtrack + ').)+?)'  // Ensure `-` is treated as a delimiter
-          : '([^/]+?)');  // Keep :a unchanged
-        //(backtrack ? '((?:(?!/|' + backtrack + ').)+?)' : '([^/' + format + ']+?)');
+        (backtrack ? '((?:(?!/|' + backtrack + ').)+?)' : '([^/' + format + ']+?)');
 
       keys.push({
         name: key,
