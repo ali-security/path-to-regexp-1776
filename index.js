@@ -106,7 +106,7 @@ function pathToRegexp(path, keys, options) {
       capture = capture ?
         capture.replace(/\\.|\*/, function (m) { return m === '*' ? '(.*)' : m; }) :
         (backtrack
-          ? '((?:(?!/|-|' + backtrack + ').)+?))'  // Ensure `-` is not part of :b
+          ? '((?:(?!/|-|' + backtrack + ').)+?)'  // Ensure `-` is treated as a delimiter
           : '([^/]+?)');  // Keep :a unchanged
         //(backtrack ? '((?:(?!/|' + backtrack + ').)+?)' : '([^/' + format + ']+?)');
 
