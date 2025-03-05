@@ -6,7 +6,7 @@ describe('path-to-regexp', function () {
     it('should generate a regex without backtracking', function () {
       console.log(pathToRegExp('/:a-:b'));
       console.log("/^(?:/([^/]+?))-(?:((?:(?!/|-).)+?))/?$/i");
-      assert.deepEqual(pathToRegExp('/:a-:b'), "/^(?:/([^/]+?))-(?:((?:(?!/|-).)+?))/?$/i");
+      assert.deepEqual(String(pathToRegExp('/:a-:b')), "/^(?:/([^/]+?))-(?:((?:(?!/|-).)+?))/?$/i");
     });
   });
 
